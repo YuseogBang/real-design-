@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X 서울 — 경계를 넘어선 무한한 교차</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #FE3A8C;
+    --yellow: #F9D003;
+    --blue: #034AC3;
+    --teal: #00BCA9;
+    --white: #FFFFFF;
+    --black: #000000;
+    --font: 'Noto Sans KR', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 18px; height: 18px;
+    border: 2px solid var(--pink);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease;
+    mix-blend-mode: difference;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .nav-brand {
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -1px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--pink); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 79px, var(--white) 79px, var(--white) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, var(--white) 79px, var(--white) 80px);
+  }
+
+  .hero-x-bg {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font);
+    font-weight: 900;
+    font-size: 560px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.035);
+    user-select: none;
+  }
+
+  .hero-label {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-weight: 900;
+    font-size: clamp(88px, 15vw, 200px);
+    line-height: 0.9;
+    letter-spacing: -5px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .x-char {
+    color: var(--pink);
+    display: inline-block;
+    position: relative;
+  }
+  .x-char::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 100%; height: 4px;
+    background: var(--yellow);
+  }
+
+  .seoul-char {
+    color: var(--white);
+    margin-left: 16px;
+  }
+
+  .hero-slogan {
+    margin-top: 56px;
+    max-width: 500px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-slogan-line {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .hero-slogan-text {
+    font-weight: 300;
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 36px;
+    background: var(--pink);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--yellow); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .scroll-line {
+    width: 60px; height: 1px;
+    background: rgba(255,255,255,0.12);
+    position: relative; overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--pink);
+    animation: scrollAnim 2s ease infinite;
+  }
+
+  .hero-colors {
+    position: absolute;
+    right: 60px; bottom: 40px;
+    display: flex; gap: 8px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .color-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+  /* ── SECTION BASE ── */
+  .section { padding: 120px 60px; position: relative; }
+
+  .section-label {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--yellow);
+  }
+
+  /* ── STORY ── */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .story-heading {
+    font-weight: 900;
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+  }
+  .story-heading .accent { color: var(--pink); }
+
+  .story-body {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.58);
+  }
+  .story-body p + p { margin-top: 20px; }
+
+  .x-multiply {
+    margin-top: 40px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--pink);
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.7;
+  }
+  .x-multiply strong { color: var(--pink); font-weight: 700; }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-section {
+    background: var(--white);
+    color: var(--black);
+    padding: 120px 60px;
+  }
+  .concept-section .section-label { color: var(--blue); }
+  .concept-section .section-label::before { background: var(--blue); }
+
+  .concept-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .concept-card {
+    background: var(--white);
+    padding: 48px 36px;
+    transition: background 0.3s ease;
+  }
+  .concept-card:hover { background: var(--black); }
+  .concept-card:hover .card-number { color: var(--pink); }
+  .concept-card:hover .card-title { color: var(--white); }
+  .concept-card:hover .card-body { color: rgba(255,255,255,0.55); }
+
+  .card-number {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    margin-bottom: 32px;
+    transition: color 0.3s;
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.3;
+    transition: color 0.3s;
+  }
+  .card-body {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(0,0,0,0.5);
+    transition: color 0.3s;
+  }
+
+  /* ── MISSION ── */
+  .mission-section {
+    background: var(--blue);
+    color: var(--white);
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mission-bg-x {
+    position: absolute;
+    right: -100px; bottom: -100px;
+    font-weight: 900;
+    font-size: 480px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.07);
+    user-select: none;
+    line-height: 1;
+  }
+  .mission-section .section-label { color: rgba(255,255,255,0.35); }
+  .mission-section .section-label::before { background: rgba(255,255,255,0.35); }
+
+  .mission-text {
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 52px);
+    line-height: 1.55;
+    max-width: 820px;
+    position: relative;
+    z-index: 1;
+  }
+  .mission-text .highlight { color: var(--yellow); }
+
+  /* ── GOODS ── */
+  .goods-section {
+    background: #080808;
+    padding: 120px 60px;
+  }
+
+  .goods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .goods-card {
+    background: #0f0f0f;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 28px;
+    transition: background 0.3s;
+  }
+  .goods-card:hover { background: #161616; }
+
+  .goods-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .goods-placeholder-x {
+    font-weight: 900;
+    font-size: 80px;
+    line-height: 1;
+    opacity: 0.06;
+  }
+
+  .goods-placeholder-label {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.15);
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  .goods-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+  }
+
+  .goods-name {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+  }
+
+  .goods-desc {
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .goods-coming {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .coming-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+    animation: pulse 1.5s ease infinite;
+  }
+  .coming-text {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--pink);
+    text-transform: uppercase;
+  }
+
+  /* ── COLORS ── */
+  .colors-section { padding: 120px 60px; background: var(--black); }
+
+  .color-swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 280px;
+    margin-top: 60px;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    transition: flex 0.4s ease;
+    cursor: default; overflow: hidden;
+  }
+  .swatch:hover { flex: 2; }
+
+  .swatch-name {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .swatch-hex {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s 0.05s;
+  }
+  .swatch:hover .swatch-name,
+  .swatch:hover .swatch-hex { opacity: 1; }
+
+  /* ── QR ── */
+  .qr-section {
+    padding: 120px 60px;
+    background: #050505;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+  .qr-left { flex: 1; }
+  .qr-right { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
+
+  .qr-title {
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .qr-title span { color: var(--teal); }
+
+  .qr-desc {
+    font-weight: 300;
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.9;
+    max-width: 380px;
+    margin-bottom: 32px;
+  }
+
+  .qr-url {
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.25);
+    word-break: break-all;
+  }
+  .qr-url a { color: var(--teal); text-decoration: none; }
+  .qr-url a:hover { color: var(--white); }
+
+  .qr-box {
+    width: 220px; height: 220px;
+    background: var(--white);
+    padding: 16px;
+    position: relative;
+  }
+  .qr-box img { width: 100%; height: 100%; display: block; }
+
+  .qr-corner {
+    position: absolute;
+    width: 22px; height: 22px;
+    border-color: var(--pink);
+    border-style: solid;
+  }
+  .qr-corner.tl { top:-5px; left:-5px; border-width:3px 0 0 3px; }
+  .qr-corner.tr { top:-5px; right:-5px; border-width:3px 3px 0 0; }
+  .qr-corner.bl { bottom:-5px; left:-5px; border-width:0 0 3px 3px; }
+  .qr-corner.br { bottom:-5px; right:-5px; border-width:0 3px 3px 0; }
+
+  .qr-label {
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 48px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--black);
+  }
+
+  .footer-brand {
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: -1px;
+  }
+  .footer-brand span { color: var(--pink); }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.15);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollAnim {
+    0%   { left: -100%; }
+    100% { left: 100%; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay { transition-delay: 0.15s; }
+  .reveal-delay2 { transition-delay: 0.25s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .section { padding: 80px 24px; }
+    .story-grid { grid-template-columns: 1fr; gap: 40px; }
+    .concept-cards { grid-template-columns: 1fr; }
+    .goods-grid { grid-template-columns: 1fr; }
+    .color-swatches { height: 180px; }
+    .qr-section { flex-direction: column; padding: 80px 24px; text-align: center; }
+    .qr-desc { max-width: 100%; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand"><span>X</span> 서울</a>
+  <ul class="nav-links">
+    <li><a href="#story">스토리</a></li>
+    <li><a href="#concept">컨셉</a></li>
+    <li><a href="#goods">굿즈</a></li>
+    <li><a href="#qr">링크</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="grid-lines"></div>
+  <div class="hero-x-bg">X</div>
+
+  <p class="hero-label">Seoul Goods Brand · 2025</p>
+
+  <h1 class="hero-title">
+    <span class="x-char">X</span><span class="seoul-char">서울</span>
+  </h1>
+
+  <div class="hero-slogan">
+    <p class="hero-slogan-line">Brand Slogan</p>
+    <p class="hero-slogan-text">경계를 넘어선 무한한 교차</p>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#goods" class="btn-primary">굿즈 보기</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+
+  <div class="hero-colors">
+    <div class="color-dot" style="background:#FE3A8C"></div>
+    <div class="color-dot" style="background:#F9D003"></div>
+    <div class="color-dot" style="background:#034AC3"></div>
+    <div class="color-dot" style="background:#00BCA9"></div>
+    <div class="color-dot" style="background:#FFFFFF; outline:1px solid rgba(255,255,255,0.2)"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section" id="story" style="background:#080808;">
+  <p class="section-label reveal">Brand Story</p>
+  <div class="story-grid">
+    <div class="reveal">
+      <h2 class="story-heading">서울이<br><span class="accent">교차</span>하는<br>순간</h2>
+    </div>
+    <div class="reveal reveal-delay">
+      <div class="story-body">
+        <p>서울은 다양한 문화와 사람들이 끊임없이 연결되고 교차하는 도시입니다. X서울은 이러한 서울의 연결성과 융합에서 시작되었습니다.</p>
+        <p>우리는 서울이라는 도시 위에 세계 여러 도시의 상징과 감각을 연결하여 새로운 서울 이미지를 만들어갑니다.</p>
+        <div class="x-multiply">
+          'X'는 단순한 나열이 아닌 <strong>곱하기</strong>입니다.<br>
+          서울이 가진 고유한 인프라와 타 도시의 개성이 결합했을 때,<br>
+          단순히 합쳐지는 것 이상의 가치 확장을 이뤄냅니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept-section" id="concept">
+  <p class="section-label reveal">Brand Concept</p>
+  <div class="concept-cards">
+    <div class="concept-card reveal">
+      <p class="card-number">01 — Intersection</p>
+      <h3 class="card-title">교차하는 연결</h3>
+      <p class="card-body">서울이 가진 고유한 인프라와 타 도시의 개성이 결합하는 순간, 단순한 합 이상의 가치가 탄생합니다.</p>
+    </div>
+    <div class="concept-card reveal reveal-delay">
+      <p class="card-number">02 — Expansion</p>
+      <h3 class="card-title">가치의 확장</h3>
+      <p class="card-body">1 + 1 = 2가 아닌, 1 × 1 = ∞. 문화가 곱해질 때 경계가 사라지고 새로운 가능성이 열립니다.</p>
+    </div>
+    <div class="concept-card reveal reveal-delay2">
+      <p class="card-number">03 — Discovery</p>
+      <h3 class="card-title">새로운 발견</h3>
+      <p class="card-body">사람들이 계속해서 새로운 서울의 가능성을 발견하게 합니다. 매 교차점마다 다른 서울이 존재합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <div class="mission-bg-x">X</div>
+  <p class="section-label reveal">Brand Mission</p>
+  <p class="mission-text reveal">
+    서울이 가진 다양한 연결을 경험하며,<br>
+    사람들이 계속해서<br>
+    <span class="highlight">새로운 서울의 가능성</span>을<br>
+    발견하게 한다.
+  </p>
+</section>
+
+<!-- GOODS -->
+<section class="goods-section" id="goods">
+  <p class="section-label reveal">Goods Collection</p>
+
+  <div class="goods-grid">
+    <!-- 굿즈 카드 1 -->
+    <div class="goods-card reveal">
+      <div class="goods-placeholder">
+        <span class="goods-placeholder-x" style="color:var(--pink)">X</span>
+      </div>
+      <span class="goods-tag" style="background:rgba(254,58,140,0.15); color:var(--pink);">01 · Coming Soon</span>
+      <h3 class="goods-name">굿즈 이름</h3>
+      <p class="goods-desc">제품 설명이 추가될 예정입니다.</p>
+      <div class="goods-coming">
+        <div class="coming-dot"></div>
+        <span class="coming-text">준비 중</span>
+      </div>
+    </div>
+
+    <!-- 굿즈 카드 2 -->
+    <div class="goods-card reveal reveal-delay">
+      <div class="goods-placeholder">
+        <span class="goods-placeholder-x" style="color:var(--yellow)">X</span>
+      </div>
+      <span class="goods-tag" style="background:rgba(249,208,3,0.12); color:var(--yellow);">02 · Coming Soon</span>
+      <h3 class="goods-name">굿즈 이름</h3>
+      <p class="goods-desc">제품 설명이 추가될 예정입니다.</p>
+      <div class="goods-coming">
+        <div class="coming-dot" style="background:var(--yellow)"></div>
+        <span class="coming-text" style="color:var(--yellow)">준비 중</span>
+      </div>
+    </div>
+
+    <!-- 굿즈 카드 3 -->
+    <div class="goods-card reveal reveal-delay2">
+      <div class="goods-placeholder">
+        <span class="goods-placeholder-x" style="color:var(--teal)">X</span>
+      </div>
+      <span class="goods-tag" style="background:rgba(0,188,169,0.12); color:var(--teal);">03 · Coming Soon</span>
+      <h3 class="goods-name">굿즈 이름</h3>
+      <p class="goods-desc">제품 설명이 추가될 예정입니다.</p>
+      <div class="goods-coming">
+        <div class="coming-dot" style="background:var(--teal)"></div>
+        <span class="coming-text" style="color:var(--teal)">준비 중</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="colors-section">
+  <p class="section-label reveal">Brand Colors</p>
+  <div class="color-swatches reveal">
+    <div class="swatch" style="background:#FE3A8C; color:#000;">
+      <p class="swatch-name">Cross Pink</p>
+      <p class="swatch-hex">#FE3A8C</p>
+    </div>
+    <div class="swatch" style="background:#F9D003; color:#000;">
+      <p class="swatch-name">Seoul Yellow</p>
+      <p class="swatch-hex">#F9D003</p>
+    </div>
+    <div class="swatch" style="background:#034AC3; color:#fff;">
+      <p class="swatch-name">City Blue</p>
+      <p class="swatch-hex">#034AC3</p>
+    </div>
+    <div class="swatch" style="background:#00BCA9; color:#000;">
+      <p class="swatch-name">Connect Teal</p>
+      <p class="swatch-hex">#00BCA9</p>
+    </div>
+    <div class="swatch" style="background:#111; border:1px solid rgba(255,255,255,0.07); color:#fff;">
+      <p class="swatch-name">Void Black</p>
+      <p class="swatch-hex">#000000</p>
+    </div>
+  </div>
+</section>
+
+<!-- QR -->
+<section class="qr-section" id="qr">
+  <div class="qr-left reveal">
+    <h2 class="qr-title">지금 <span>스캔</span>하고<br>X 서울을<br>만나세요</h2>
+    <p class="qr-desc">QR 코드를 스캔하면 X 서울의 굿즈와 브랜드 스토리를 직접 경험할 수 있습니다. 경계를 넘어선 무한한 교차의 세계로.</p>
+    <p class="qr-url">이 페이지 URL을 배포 후 QR 코드가 업데이트됩니다</p>
+  </div>
+  <div class="qr-right reveal reveal-delay">
+    <div class="qr-box">
+      <div class="qr-corner tl"></div>
+      <div class="qr-corner tr"></div>
+      <div class="qr-corner bl"></div>
+      <div class="qr-corner br"></div>
+      <!-- QR 이미지: 배포 후 실제 QR 이미지로 교체하세요 -->
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="60" height="60" fill="black"/>
+        <rect x="16" y="16" width="48" height="48" fill="white"/>
+        <rect x="22" y="22" width="36" height="36" fill="black"/>
+        <rect x="130" y="10" width="60" height="60" fill="black"/>
+        <rect x="136" y="16" width="48" height="48" fill="white"/>
+        <rect x="142" y="22" width="36" height="36" fill="black"/>
+        <rect x="10" y="130" width="60" height="60" fill="black"/>
+        <rect x="16" y="136" width="48" height="48" fill="white"/>
+        <rect x="22" y="142" width="36" height="36" fill="black"/>
+        <rect x="80" y="10" width="10" height="10" fill="black"/>
+        <rect x="100" y="10" width="10" height="10" fill="#FE3A8C"/>
+        <rect x="110" y="10" width="10" height="10" fill="black"/>
+        <rect x="90" y="20" width="10" height="10" fill="black"/>
+        <rect x="110" y="20" width="10" height="10" fill="black"/>
+        <rect x="80" y="30" width="10" height="10" fill="#034AC3"/>
+        <rect x="100" y="30" width="10" height="10" fill="black"/>
+        <rect x="80" y="40" width="10" height="10" fill="black"/>
+        <rect x="90" y="40" width="10" height="10" fill="black"/>
+        <rect x="110" y="40" width="10" height="10" fill="black"/>
+        <rect x="80" y="50" width="10" height="10" fill="#F9D003"/>
+        <rect x="100" y="50" width="10" height="10" fill="black"/>
+        <rect x="80" y="60" width="10" height="10" fill="black"/>
+        <rect x="110" y="60" width="10" height="10" fill="#00BCA9"/>
+        <rect x="80" y="70" width="10" height="10" fill="black"/>
+        <rect x="100" y="70" width="10" height="10" fill="black"/>
+        <rect x="120" y="70" width="10" height="10" fill="black"/>
+        <rect x="70" y="80" width="10" height="10" fill="black"/>
+        <rect x="80" y="80" width="10" height="10" fill="#FE3A8C"/>
+        <rect x="100" y="80" width="10" height="10" fill="black"/>
+        <rect x="110" y="80" width="10" height="10" fill="black"/>
+        <rect x="120" y="80" width="10" height="10" fill="black"/>
+        <rect x="80" y="90" width="10" height="10" fill="black"/>
+        <rect x="90" y="90" width="10" height="10" fill="#034AC3"/>
+        <rect x="110" y="90" width="10" height="10" fill="black"/>
+        <rect x="70" y="100" width="10" height="10" fill="black"/>
+        <rect x="80" y="100" width="10" height="10" fill="black"/>
+        <rect x="100" y="100" width="10" height="10" fill="black"/>
+        <rect x="120" y="100" width="10" height="10" fill="#F9D003"/>
+        <rect x="90" y="110" width="10" height="10" fill="black"/>
+        <rect x="110" y="110" width="10" height="10" fill="black"/>
+        <rect x="120" y="110" width="10" height="10" fill="black"/>
+        <rect x="70" y="120" width="10" height="10" fill="black"/>
+        <rect x="80" y="120" width="10" height="10" fill="#00BCA9"/>
+        <rect x="100" y="120" width="10" height="10" fill="black"/>
+        <rect x="120" y="120" width="10" height="10" fill="black"/>
+        <rect x="130" y="80" width="10" height="10" fill="black"/>
+        <rect x="150" y="80" width="10" height="10" fill="black"/>
+        <rect x="170" y="80" width="10" height="10" fill="#FE3A8C"/>
+        <rect x="130" y="90" width="10" height="10" fill="#034AC3"/>
+        <rect x="160" y="90" width="10" height="10" fill="black"/>
+        <rect x="130" y="100" width="10" height="10" fill="black"/>
+        <rect x="150" y="100" width="10" height="10" fill="black"/>
+        <rect x="170" y="100" width="10" height="10" fill="black"/>
+        <rect x="140" y="110" width="10" height="10" fill="black"/>
+        <rect x="160" y="110" width="10" height="10" fill="#F9D003"/>
+        <rect x="130" y="120" width="10" height="10" fill="black"/>
+        <rect x="150" y="120" width="10" height="10" fill="#00BCA9"/>
+        <rect x="170" y="120" width="10" height="10" fill="black"/>
+        <rect x="80" y="140" width="10" height="10" fill="black"/>
+        <rect x="100" y="140" width="10" height="10" fill="black"/>
+        <rect x="80" y="150" width="10" height="10" fill="#FE3A8C"/>
+        <rect x="90" y="150" width="10" height="10" fill="black"/>
+        <rect x="110" y="150" width="10" height="10" fill="black"/>
+        <rect x="80" y="160" width="10" height="10" fill="black"/>
+        <rect x="100" y="160" width="10" height="10" fill="black"/>
+        <rect x="80" y="170" width="10" height="10" fill="black"/>
+        <rect x="90" y="170" width="10" height="10" fill="#034AC3"/>
+        <rect x="110" y="170" width="10" height="10" fill="black"/>
+        <rect x="80" y="180" width="10" height="10" fill="black"/>
+        <rect x="100" y="180" width="10" height="10" fill="#F9D003"/>
+        <rect x="110" y="180" width="10" height="10" fill="black"/>
+      </svg>
+    </div>
+    <p class="qr-label">X Seoul · Scan to Explore</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><span>X</span> 서울</div>
+  <ul class="footer-links">
+    <li><a href="#story">스토리</a></li>
+    <li><a href="#concept">컨셉</a></li>
+    <li><a href="#goods">굿즈</a></li>
+  </ul>
+  <p class="footer-copy">경계를 넘어선 무한한 교차 · 2025</p>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
