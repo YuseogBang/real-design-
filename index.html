@@ -373,106 +373,139 @@
   }
   .mission-text .highlight { color: var(--teal); font-weight: 700; }
 
-  /* ── GOODS IMAGE SLIDER ── */
-  .goods-card {
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0;
+  /* ── PROTOTYPE SLIDER ── */
+  .proto-slider-wrap {
+    margin-bottom: 60px;
   }
-  .goods-img-slider {
-    position: relative;
-    width: 100%;
-    flex: 1 1 0;
-    overflow: hidden;
-    background: #0a0a0a;
-    min-height: 0;
-  }
-  .goods-img-track {
+  .proto-slider-header {
     display: flex;
-    height: 100%;
-    transition: transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94);
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .proto-slider-label {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .proto-slider-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .proto-nav-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+  .proto-nav-btn:hover {
+    border-color: rgba(255,255,255,0.5);
+    color: var(--white);
+  }
+  .proto-nav-count {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.3);
+    min-width: 36px;
+    text-align: center;
+  }
+  .proto-slider-track-outer {
+    overflow: hidden;
+    width: 100%;
+  }
+  .proto-slider-track {
+    display: flex;
+    gap: 2px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
   }
-  .goods-img-slide {
+  .proto-slide {
     flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: calc((100% - 4px) / 3);
+    aspect-ratio: 4/5;
     background: #0f0f0f;
-  }
-  .goods-ph {
+    border: 1px solid rgba(255,255,255,0.06);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .proto-slide:hover { border-color: rgba(255,255,255,0.15); }
+  .proto-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .proto-slide-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
     width: 100%;
     height: 100%;
     pointer-events: none;
   }
-  .goods-ph-icon { font-size: 38px; opacity: 0.15; line-height: 1; }
-  .goods-ph-num  {
-    font-size: 9px;
+  .proto-slide-icon {
+    width: 48px; height: 48px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: rgba(255,255,255,0.18);
+  }
+  .proto-slide-num {
+    font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.18);
   }
-  /* arrow buttons */
-  .gs-arrow {
+  .proto-slide-badge {
     position: absolute;
-    top: 50%; transform: translateY(-50%);
-    width: 30px; height: 30px;
-    background: rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.75);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
+    top: 16px;
+    left: 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 4px 10px;
+  }
+  .proto-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+  .proto-dot {
+    width: 20px; height: 2px;
+    background: rgba(255,255,255,0.15);
     cursor: pointer;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s, background 0.2s;
-    backdrop-filter: blur(4px);
-    pointer-events: auto;
+    transition: background 0.2s;
   }
-  .goods-card:hover .gs-arrow { opacity: 1; }
-  .gs-arrow:hover { background: rgba(0,0,0,0.9); }
-  .gs-arrow.prev { left: 8px; }
-  .gs-arrow.next { right: 8px; }
-  /* dots */
-  .gs-dots {
-    position: absolute;
-    bottom: 10px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; gap: 5px;
-    z-index: 10;
-    pointer-events: auto;
-  }
-  .gs-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.22);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .gs-dot.active { background: rgba(255,255,255,0.85); transform: scale(1.3); }
-  /* card info area */
-  .goods-info {
-    padding: 22px 24px 26px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-    width: 100%;
-  }
-  @media (hover: none) and (pointer: coarse) {
-    .gs-arrow { opacity: 1 !important; }
-  }
-  @media (max-width: 768px) {
-    .goods-info { padding: 18px 18px 22px; }
-  }
+  .proto-dot.active { background: var(--white); }
 
+  @media (max-width: 768px) {
+    .proto-slide { width: calc(100% - 40px); }
+    .proto-slider-wrap { margin-bottom: 40px; }
+  }
 
   /* ── GOODS ── */
   .goods-section { background: #080808; padding: var(--section-y) var(--section-x); }
@@ -487,9 +520,11 @@
     background: #0f0f0f;
     position: relative;
     overflow: hidden;
-    height: 480px;
+    aspect-ratio: 3/4;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 28px;
     transition: background 0.3s;
     color: var(--white);
     text-decoration: none;
@@ -553,6 +588,8 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 1.3;
+    position: relative;
+    z-index: 1;
     margin-bottom: 8px;
   }
   .goods-desc {
@@ -560,6 +597,8 @@
     font-size: 13px;
     color: rgba(255,255,255,0.4);
     line-height: var(--body-leading);
+    position: relative;
+    z-index: 1;
     max-width: 24em;
   }
   .goods-coming {
@@ -567,6 +606,8 @@
     align-items: center;
     gap: 8px;
     margin-top: 16px;
+    position: relative;
+    z-index: 1;
   }
   .coming-dot {
     width: 6px; height: 6px;
@@ -1492,155 +1533,103 @@
 <section class="goods-section" id="goods">
   <p class="section-label reveal">Goods Collection</p>
 
+  <!-- ── 프로토타입 슬라이더 ── -->
+  <div class="proto-slider-wrap reveal">
+    <div class="proto-slider-header">
+      <span class="proto-slider-label">Prototype Preview · 이미지 추가 예정</span>
+      <div class="proto-slider-nav">
+        <button class="proto-nav-btn" id="protoPrev" aria-label="이전">&#8592;</button>
+        <span class="proto-nav-count" id="protoCount">1 / 3</span>
+        <button class="proto-nav-btn" id="protoNext" aria-label="다음">&#8594;</button>
+      </div>
+    </div>
+    <div class="proto-slider-track-outer">
+      <div class="proto-slider-track" id="protoTrack">
+        <!-- 슬라이드 1 -->
+        <div class="proto-slide">
+          <div class="proto-slide-badge">Image 01</div>
+          <div class="proto-slide-placeholder">
+            <div class="proto-slide-icon">+</div>
+            <span class="proto-slide-num">prototype · 01</span>
+          </div>
+        </div>
+        <!-- 슬라이드 2 -->
+        <div class="proto-slide">
+          <div class="proto-slide-badge">Image 02</div>
+          <div class="proto-slide-placeholder">
+            <div class="proto-slide-icon">+</div>
+            <span class="proto-slide-num">prototype · 02</span>
+          </div>
+        </div>
+        <!-- 슬라이드 3 -->
+        <div class="proto-slide">
+          <div class="proto-slide-badge">Image 03</div>
+          <div class="proto-slide-placeholder">
+            <div class="proto-slide-icon">+</div>
+            <span class="proto-slide-num">prototype · 03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proto-dots" id="protoDots">
+      <div class="proto-dot active" data-idx="0"></div>
+      <div class="proto-dot" data-idx="1"></div>
+      <div class="proto-dot" data-idx="2"></div>
+    </div>
+  </div>
 
   <div class="goods-grid">
     <button class="goods-card reveal is-pink" onclick="openModal('pink')">
-      <div class="goods-img-slider" onclick="event.stopPropagation()">
-        <div class="goods-img-track">
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🧲</span>
-              <span class="goods-ph-num">Image 01 · 마그넷 — 전면</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🧲</span>
-              <span class="goods-ph-num">Image 02 · 마그넷 — 후면</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🧲</span>
-              <span class="goods-ph-num">Image 03 · 패키지</span>
-            </div>
-          </div>
-        </div>
-        <button class="gs-arrow prev" aria-label="이전">&#8249;</button>
-        <button class="gs-arrow next" aria-label="다음">&#8250;</button>
-        <div class="gs-dots"><div class="gs-dot active"></div><div class="gs-dot"></div><div class="gs-dot"></div></div>
+      <div class="goods-visual">
+        <img src="data:image/png;base64,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" alt="" style="width:96px;height:96px;object-fit:contain;opacity:0.15;">
       </div>
-      <div class="goods-info">
-        <span class="goods-tag">상세보기</span>
-        <h3 class="goods-name">X SEOUL 마그넷</h3>
-        <p class="goods-desc">강력한 자력과 고광택 레진 코팅. 4개 도시 협업 그래픽, 4종 세트 구성.</p>
-        <div class="goods-coming">
+      <span class="goods-tag">상세보기</span>
+      <h3 class="goods-name">X SEOUL 마그넷</h3>
+      <p class="goods-desc">강력한 자력과 고광택 레진 코팅. 4개 도시 협업 그래픽, 4종 세트 구성.</p>
+      <div class="goods-coming">
         <div class="coming-dot"></div>
-      </div>
         <span class="coming-text">₩ 18,000</span>
       </div>
     </button>
 
     <!-- 굿즈 카드 2: 여권 케이스 -->
     <button class="goods-card reveal reveal-delay is-yellow" onclick="openModal('yellow')">
-      <div class="goods-img-slider" onclick="event.stopPropagation()">
-        <div class="goods-img-track">
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✈️</span>
-              <span class="goods-ph-num">Image 01 · 여권 케이스 — 전면</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✈️</span>
-              <span class="goods-ph-num">Image 02 · 내부 구성</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✈️</span>
-              <span class="goods-ph-num">Image 03 · 패키지</span>
-            </div>
-          </div>
-        </div>
-        <button class="gs-arrow prev" aria-label="이전">&#8249;</button>
-        <button class="gs-arrow next" aria-label="다음">&#8250;</button>
-        <div class="gs-dots"><div class="gs-dot active"></div><div class="gs-dot"></div><div class="gs-dot"></div></div>
+      <div class="goods-visual">
+        <img src="data:image/png;base64,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" alt="" style="width:96px;height:96px;object-fit:contain;opacity:0.15;">
       </div>
-      <div class="goods-info">
-        <span class="goods-tag">상세보기</span>
-        <h3 class="goods-name">X SEOUL 여권 케이스</h3>
-        <p class="goods-desc">슬림 PU 레더 소재, 카드 4매 수납. 여행의 첫 순간을 X SEOUL답게.</p>
-        <div class="goods-coming">
+      <span class="goods-tag">상세보기</span>
+      <h3 class="goods-name">X SEOUL 여권 케이스</h3>
+      <p class="goods-desc">슬림 PU 레더 소재, 카드 4매 수납. 여행의 첫 순간을 X SEOUL답게.</p>
+      <div class="goods-coming">
         <div class="coming-dot"></div>
-      </div>
         <span class="coming-text">₩ 32,000</span>
       </div>
     </button>
 
     <!-- 굿즈 카드 3: 연필 -->
     <button class="goods-card reveal reveal-delay2 is-blue" onclick="openModal('blue')">
-      <div class="goods-img-slider" onclick="event.stopPropagation()">
-        <div class="goods-img-track">
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✏️</span>
-              <span class="goods-ph-num">Image 01 · 연필 세트 — 구성</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✏️</span>
-              <span class="goods-ph-num">Image 02 · 디테일 샷</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">✏️</span>
-              <span class="goods-ph-num">Image 03 · 패키지</span>
-            </div>
-          </div>
-        </div>
-        <button class="gs-arrow prev" aria-label="이전">&#8249;</button>
-        <button class="gs-arrow next" aria-label="다음">&#8250;</button>
-        <div class="gs-dots"><div class="gs-dot active"></div><div class="gs-dot"></div><div class="gs-dot"></div></div>
+      <div class="goods-visual">
+        <img src="data:image/png;base64,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" alt="" style="width:96px;height:96px;object-fit:contain;opacity:0.15;">
       </div>
-      <div class="goods-info">
-        <span class="goods-tag">상세보기</span>
-        <h3 class="goods-name">X SEOUL 연필 세트</h3>
-        <p class="goods-desc">HB 고품질 흑연심, 6본 구성. 손에 쥐는 순간부터 브랜드가 느껴지는 디테일.</p>
-        <div class="goods-coming">
+      <span class="goods-tag">상세보기</span>
+      <h3 class="goods-name">X SEOUL 연필 세트</h3>
+      <p class="goods-desc">HB 고품질 흑연심, 6본 구성. 손에 쥐는 순간부터 브랜드가 느껴지는 디테일.</p>
+      <div class="goods-coming">
         <div class="coming-dot"></div>
-      </div>
         <span class="coming-text">₩ 24,000</span>
       </div>
     </button>
 
     <!-- 굿즈 카드 4: 포스터/엽서 -->
     <button class="goods-card reveal reveal-delay2 is-mint" onclick="openModal('mint')">
-      <div class="goods-img-slider" onclick="event.stopPropagation()">
-        <div class="goods-img-track">
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🖼️</span>
-              <span class="goods-ph-num">Image 01 · 포스터 A2</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🖼️</span>
-              <span class="goods-ph-num">Image 02 · 엽서 12종</span>
-            </div>
-          </div>
-          <div class="goods-img-slide">
-            <div class="goods-ph">
-              <span class="goods-ph-icon">🖼️</span>
-              <span class="goods-ph-num">Image 03 · 전체 세트</span>
-            </div>
-          </div>
-        </div>
-        <button class="gs-arrow prev" aria-label="이전">&#8249;</button>
-        <button class="gs-arrow next" aria-label="다음">&#8250;</button>
-        <div class="gs-dots"><div class="gs-dot active"></div><div class="gs-dot"></div><div class="gs-dot"></div></div>
+      <div class="goods-visual">
+        <img src="data:image/png;base64,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" alt="" style="width:96px;height:96px;object-fit:contain;opacity:0.15;">
       </div>
-      <div class="goods-info">
-        <span class="goods-tag">상세보기</span>
-        <h3 class="goods-name">X SEOUL 포스터 &amp; 엽서 세트</h3>
-        <p class="goods-desc">A2 아트지 포스터 2종 + 엽서 12종. 공간을 바꾸는 X SEOUL 그래픽 아트 에디션.</p>
-        <div class="goods-coming">
+      <span class="goods-tag">상세보기</span>
+      <h3 class="goods-name">X SEOUL 포스터 &amp; 엽서 세트</h3>
+      <p class="goods-desc">A2 아트지 포스터 2종 + 엽서 12종. 공간을 바꾸는 X SEOUL 그래픽 아트 에디션.</p>
+      <div class="goods-coming">
         <div class="coming-dot"></div>
-      </div>
         <span class="coming-text">₩ 42,000</span>
       </div>
     </button>
@@ -1720,39 +1709,48 @@
 <script>
 /* 커서 제거됨 */
 
-/* ── 굿즈 이미지 슬라이더 ── */
+/* ── 프로토타입 슬라이더 ── */
 (function() {
-  document.querySelectorAll('.goods-img-slider').forEach(function(slider) {
-    var track  = slider.querySelector('.goods-img-track');
-    var slides = slider.querySelectorAll('.goods-img-slide');
-    var dots   = slider.querySelectorAll('.gs-dot');
-    var prev   = slider.querySelector('.gs-arrow.prev');
-    var next   = slider.querySelector('.gs-arrow.next');
-    var total  = slides.length;
-    var cur    = 0;
+  const track = document.getElementById('protoTrack');
+  const count = document.getElementById('protoCount');
+  const dots = document.querySelectorAll('.proto-dot');
+  const total = 3;
+  let current = 0;
 
-    function goTo(idx) {
-      cur = (idx + total) % total;
-      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
-      dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
-    }
+  function isMobile() { return window.innerWidth <= 768; }
 
-    prev.addEventListener('click', function(e) { e.stopPropagation(); goTo(cur - 1); });
-    next.addEventListener('click', function(e) { e.stopPropagation(); goTo(cur + 1); });
-    dots.forEach(function(d, i) {
-      d.addEventListener('click', function(e) { e.stopPropagation(); goTo(i); });
-    });
+  function getSlideWidth() {
+    const outer = document.querySelector('.proto-slider-track-outer');
+    if (!outer) return 0;
+    if (isMobile()) return outer.clientWidth;
+    const gap = 2;
+    return (outer.clientWidth - gap * 2) / 3;
+  }
 
-    // 터치 스와이프
-    var tx = 0;
-    slider.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
-    slider.addEventListener('touchend', function(e) {
-      var diff = tx - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 35) goTo(diff > 0 ? cur + 1 : cur - 1);
-    }, { passive: true });
-  });
+  function goTo(idx) {
+    current = (idx + total) % total;
+    const w = getSlideWidth();
+    const gap = 2;
+    const offset = isMobile() ? current * (w + gap) : 0;
+    track.style.transform = `translateX(-${offset}px)`;
+    count.textContent = `${current + 1} / ${total}`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  document.getElementById('protoPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('protoNext').addEventListener('click', () => goTo(current + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // 터치 스와이프
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  }, { passive: true });
+
+  window.addEventListener('resize', () => goTo(current));
 })();
-
 
 /* ── 스크롤 reveal ── */
 const reveals = document.querySelectorAll('.reveal');
