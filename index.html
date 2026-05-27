@@ -160,28 +160,24 @@
 
   .hero-slogan {
     margin-top: 56px;
-    max-width: 560px;
+    max-width: 500px;
     animation: fadeUp 0.8s 0.2s ease both;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
   }
   .hero-slogan-line {
     font-weight: 700;
-    font-size: clamp(16px, 1.8vw, 22px);
-    letter-spacing: 0.5px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1;
-    display: block;
+    font-size: clamp(20px, 2.6vw, 34px);
+    letter-spacing: 2px;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 16px;
   }
   .hero-slogan-text {
     font-weight: 300;
-    font-size: clamp(28px, 3.4vw, 46px);
-    color: var(--white);
-    line-height: 1.15;
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
     text-align: left;
     word-break: keep-all;
-    display: block;
   }
   .hero-slogan-text .keyword { color: var(--pink); font-weight: 700; }
 
@@ -372,140 +368,6 @@
     z-index: 1;
   }
   .mission-text .highlight { color: var(--teal); font-weight: 700; }
-
-  /* ── PROTOTYPE SLIDER ── */
-  .proto-slider-wrap {
-    margin-bottom: 60px;
-  }
-  .proto-slider-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  .proto-slider-label {
-    font-weight: 300;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-  }
-  .proto-slider-nav {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .proto-nav-btn {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: border-color 0.2s, color 0.2s;
-    flex-shrink: 0;
-  }
-  .proto-nav-btn:hover {
-    border-color: rgba(255,255,255,0.5);
-    color: var(--white);
-  }
-  .proto-nav-count {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0.3);
-    min-width: 36px;
-    text-align: center;
-  }
-  .proto-slider-track-outer {
-    overflow: hidden;
-    width: 100%;
-  }
-  .proto-slider-track {
-    display: flex;
-    gap: 2px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-  }
-  .proto-slide {
-    flex-shrink: 0;
-    width: calc((100% - 4px) / 3);
-    aspect-ratio: 4/5;
-    background: #0f0f0f;
-    border: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color 0.3s;
-  }
-  .proto-slide:hover { border-color: rgba(255,255,255,0.15); }
-  .proto-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .proto-slide-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-  .proto-slide-icon {
-    width: 48px; height: 48px;
-    border: 1.5px solid rgba(255,255,255,0.12);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: rgba(255,255,255,0.18);
-  }
-  .proto-slide-num {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.18);
-  }
-  .proto-slide-badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 4px 10px;
-  }
-  .proto-dots {
-    display: flex;
-    gap: 6px;
-    margin-top: 16px;
-    justify-content: center;
-  }
-  .proto-dot {
-    width: 20px; height: 2px;
-    background: rgba(255,255,255,0.15);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .proto-dot.active { background: var(--white); }
-
-  @media (max-width: 768px) {
-    .proto-slide { width: calc(100% - 40px); }
-    .proto-slider-wrap { margin-bottom: 40px; }
-  }
 
   /* ── GOODS ── */
   .goods-section { background: #080808; padding: var(--section-y) var(--section-x); }
@@ -1183,7 +1045,7 @@
     .hero { padding: 110px 20px 64px; min-height: 90vh; }
     .hero-label { font-size: 11px; letter-spacing: 4px; }
     .hero-slogan { margin-top: 36px; max-width: 100%; }
-    .hero-slogan-line { font-size: 11px; letter-spacing: 1px; }
+    .hero-slogan-line { font-size: 11px; letter-spacing: 3px; }
     .hero-slogan-text { font-size: clamp(28px, 9vw, 48px); line-height: 1.15; word-break: keep-all; }
     .hero-x-bg { right: -10px; width: min(70vw, 300px); opacity: 0.08; }
     .hero-scroll { bottom: 24px; }
@@ -1533,52 +1395,8 @@
 <section class="goods-section" id="goods">
   <p class="section-label reveal">Goods Collection</p>
 
-  <!-- ── 프로토타입 슬라이더 ── -->
-  <div class="proto-slider-wrap reveal">
-    <div class="proto-slider-header">
-      <span class="proto-slider-label">Prototype Preview · 이미지 추가 예정</span>
-      <div class="proto-slider-nav">
-        <button class="proto-nav-btn" id="protoPrev" aria-label="이전">&#8592;</button>
-        <span class="proto-nav-count" id="protoCount">1 / 3</span>
-        <button class="proto-nav-btn" id="protoNext" aria-label="다음">&#8594;</button>
-      </div>
-    </div>
-    <div class="proto-slider-track-outer">
-      <div class="proto-slider-track" id="protoTrack">
-        <!-- 슬라이드 1 -->
-        <div class="proto-slide">
-          <div class="proto-slide-badge">Image 01</div>
-          <div class="proto-slide-placeholder">
-            <div class="proto-slide-icon">+</div>
-            <span class="proto-slide-num">prototype · 01</span>
-          </div>
-        </div>
-        <!-- 슬라이드 2 -->
-        <div class="proto-slide">
-          <div class="proto-slide-badge">Image 02</div>
-          <div class="proto-slide-placeholder">
-            <div class="proto-slide-icon">+</div>
-            <span class="proto-slide-num">prototype · 02</span>
-          </div>
-        </div>
-        <!-- 슬라이드 3 -->
-        <div class="proto-slide">
-          <div class="proto-slide-badge">Image 03</div>
-          <div class="proto-slide-placeholder">
-            <div class="proto-slide-icon">+</div>
-            <span class="proto-slide-num">prototype · 03</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="proto-dots" id="protoDots">
-      <div class="proto-dot active" data-idx="0"></div>
-      <div class="proto-dot" data-idx="1"></div>
-      <div class="proto-dot" data-idx="2"></div>
-    </div>
-  </div>
-
   <div class="goods-grid">
+    <!-- 굿즈 카드 1: 마그넷 -->
     <button class="goods-card reveal is-pink" onclick="openModal('pink')">
       <div class="goods-visual">
         <img src="data:image/png;base64,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" alt="" style="width:96px;height:96px;object-fit:contain;opacity:0.15;">
@@ -1708,49 +1526,6 @@
 
 <script>
 /* 커서 제거됨 */
-
-/* ── 프로토타입 슬라이더 ── */
-(function() {
-  const track = document.getElementById('protoTrack');
-  const count = document.getElementById('protoCount');
-  const dots = document.querySelectorAll('.proto-dot');
-  const total = 3;
-  let current = 0;
-
-  function isMobile() { return window.innerWidth <= 768; }
-
-  function getSlideWidth() {
-    const outer = document.querySelector('.proto-slider-track-outer');
-    if (!outer) return 0;
-    if (isMobile()) return outer.clientWidth;
-    const gap = 2;
-    return (outer.clientWidth - gap * 2) / 3;
-  }
-
-  function goTo(idx) {
-    current = (idx + total) % total;
-    const w = getSlideWidth();
-    const gap = 2;
-    const offset = isMobile() ? current * (w + gap) : 0;
-    track.style.transform = `translateX(-${offset}px)`;
-    count.textContent = `${current + 1} / ${total}`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  document.getElementById('protoPrev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('protoNext').addEventListener('click', () => goTo(current + 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
-
-  // 터치 스와이프
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-  }, { passive: true });
-
-  window.addEventListener('resize', () => goTo(current));
-})();
 
 /* ── 스크롤 reveal ── */
 const reveals = document.querySelectorAll('.reveal');
