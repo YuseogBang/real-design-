@@ -6,7 +6,7 @@
 <title>X SEOUL — 경계를 넘어선 무한한 교차</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,7 +17,7 @@
     --teal: #00BCA9;
     --white: #FFFFFF;
     --black: #000000;
-    --font: 'Noto Sans KR', sans-serif;
+    --font: 'Pretendard', sans-serif;
     --section-y: 120px;
     --section-x: 60px;
     --section-gap: 48px;
@@ -275,6 +275,13 @@
     color: rgba(255,255,255,0.76);
     max-width: 760px;
   }
+  .story-body .emphasis-copy,
+  .card-body {
+    font-weight: 700;
+    font-size: clamp(16px, 1.45vw, 20px);
+    color: rgba(255,255,255,0.92);
+    line-height: 1.72;
+  }
   .story-body p + p { margin-top: 18px; }
   .x-multiply {
     margin-top: 32px;
@@ -336,10 +343,7 @@
     transition: color 0.3s;
   }
   .card-body {
-    font-weight: 300;
-    font-size: 15px;
     line-height: 1.72;
-    color: rgba(255,255,255,0.68);
     transition: color 0.3s;
     max-width: 30em;
     margin-top: 0;
@@ -375,9 +379,13 @@
 
   /* ── GOODS ── */
   .goods-section { background: #080808; padding: var(--section-y) var(--section-x); }
+  .goods-section .section-label {
+    font-size: clamp(28px, 4vw, 56px);
+    margin-bottom: 56px;
+  }
   .goods-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 2px;
     margin-top: var(--section-gap);
     background: rgba(255,255,255,0.05);
@@ -401,7 +409,7 @@
   .goods-slider-area {
     position: relative;
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 16/9;
     overflow: hidden;
     background: #080808;
     flex-shrink: 0;
@@ -546,6 +554,7 @@
   .goods-card.is-yellow .goods-slider-area::before { background: var(--yellow); }
   .goods-card.is-blue .goods-slider-area::before { background: var(--blue); }
   .goods-card.is-mint .goods-slider-area::before { background: var(--teal); }
+  .goods-card.is-white .goods-slider-area::before { background: var(--white); }
 
   .goods-tag {
     display: inline-block;
@@ -561,17 +570,18 @@
   .goods-card.is-yellow .goods-tag { background: rgba(249,208,3,0.14); color: var(--yellow); }
   .goods-card.is-blue .goods-tag { background: rgba(3,74,195,0.18); color: #6d9fff; }
   .goods-card.is-mint .goods-tag { background: rgba(0,188,169,0.14); color: var(--teal); }
+  .goods-card.is-white .goods-tag { background: rgba(255,255,255,0.14); color: var(--white); }
 
   .goods-name {
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 900;
+    font-size: clamp(22px, 1.9vw, 30px);
     line-height: 1.3;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   .goods-desc {
-    font-weight: 300;
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    font-size: clamp(14px, 1vw, 17px);
+    color: rgba(255,255,255,0.62);
     line-height: var(--body-leading);
     max-width: 24em;
   }
@@ -590,9 +600,10 @@
   .goods-card.is-yellow .coming-dot { background: var(--yellow); }
   .goods-card.is-blue .coming-dot { background: #6d9fff; }
   .goods-card.is-mint .coming-dot { background: var(--teal); }
+  .goods-card.is-white .coming-dot { background: var(--white); }
   .coming-text {
-    font-weight: 700;
-    font-size: 11px;
+    font-weight: 900;
+    font-size: clamp(20px, 1.8vw, 28px);
     letter-spacing: 3px;
     text-transform: uppercase;
   }
@@ -600,17 +611,20 @@
   .goods-card.is-yellow .coming-text { color: var(--yellow); }
   .goods-card.is-blue .coming-text { color: #6d9fff; }
   .goods-card.is-mint .coming-text { color: var(--teal); }
+  .goods-card.is-white .coming-text { color: var(--white); }
   /* detail btn color per card */
   .goods-card.is-pink .goods-detail-btn:hover { color: var(--pink); border-color: var(--pink); }
   .goods-card.is-yellow .goods-detail-btn:hover { color: var(--yellow); border-color: var(--yellow); }
   .goods-card.is-blue .goods-detail-btn:hover { color: #6d9fff; border-color: #6d9fff; }
   .goods-card.is-mint .goods-detail-btn:hover { color: var(--teal); border-color: var(--teal); }
+  .goods-card.is-white .goods-detail-btn:hover { color: var(--white); border-color: var(--white); }
 
   /* per-card slider backgrounds */
   .goods-card.is-pink .goods-slider-area { background: #120008; }
   .goods-card.is-yellow .goods-slider-area { background: #100e00; }
   .goods-card.is-blue .goods-slider-area { background: #00030e; }
   .goods-card.is-mint .goods-slider-area { background: #001210; }
+  .goods-card.is-white .goods-slider-area { background: #171717; }
 
   /* mobile: show buttons always on touch devices */
   @media (hover: none) and (pointer: coarse) {
@@ -1197,7 +1211,7 @@
     .concept-card { padding: 28px 20px; }
     .card-number { font-size: 10px; letter-spacing: 3px; }
     .card-title { font-size: 18px; margin: 10px 0; }
-    .card-body { font-size: 13px; line-height: 1.75; word-break: keep-all; }
+    .card-body { font-size: 16px; line-height: 1.75; word-break: keep-all; }
 
     /* MISSION */
     .mission-section { padding: 72px 20px; }
@@ -1216,13 +1230,13 @@
     /* GOODS */
     .goods-grid { grid-template-columns: 1fr; gap: 2px; margin-top: 28px; }
     .goods-card { border-radius: 0; }
-    .goods-slider-area { aspect-ratio: 4/3; }
+    .goods-slider-area { aspect-ratio: 16/9; }
     .goods-info { padding: 20px 18px 24px; }
     .goods-tag { font-size: 10px; letter-spacing: 2px; }
-    .goods-name { font-size: 16px; margin: 8px 0 10px; }
-    .goods-desc { font-size: 12px; line-height: 1.7; }
+    .goods-name { font-size: 24px; margin: 8px 0 10px; }
+    .goods-desc { font-size: 14px; line-height: 1.7; }
     .goods-footer { padding-top: 16px; margin-top: 16px; }
-    .coming-text { font-size: 15px; }
+    .coming-text { font-size: 22px; }
     .goods-btn { font-size: 10px; padding: 8px 14px; letter-spacing: 1.5px; }
 
     /* COLORS */
@@ -1304,9 +1318,6 @@
         <button class="btn-modal-primary" id="modalBtnPrimary" style="font-size:18px;">🤍</button>
         <button class="btn-modal-outline" onclick="closeModal()">목록으로 돌아가기</button>
       </div>
-      <div class="modal-divider"></div>
-      <p class="modal-concept-title">X SEOUL × 컨셉</p>
-      <p class="modal-concept-text" id="modalConcept"></p>
     </div>
   </div>
 </div>
@@ -1374,9 +1385,9 @@
     <div class="reveal reveal-delay">
       <div class="story-body">
         <p>서울은 서로 다른 시간과 문화가 공존하는 도시입니다. 오래된 궁궐과 미래의 스카이라인, 전통과 트렌드가 한 장면 안에서 자연스럽게 어우러집니다.</p> 
-        </p>X SEOUL은 서울에 세계 네 도시의 감성을 더합니다.</p>
+        <p class="emphasis-copy">X SEOUL은 서울에 세계 네 도시의 감성을 더합니다.</p>
         <p>베네치아, 파리, 도쿄, 뉴욕. 각 도시가 가진 고유한 분위기가 서울과 만나 새로운 풍경을 만들어냅니다.</p>
-        <p>익숙한 서울을 낯설게 바라보는 경험.
+        <p class="emphasis-copy">익숙한 서울을 낯설게 바라보는 경험.
 그것이 X SEOUL이 담고자 하는 이야기입니다.</p>
         </div>
       </div>
@@ -1396,8 +1407,7 @@
     <div class="concept-card reveal reveal-delay">
       <p class="card-number">02 Expansion</p>
       <h3 class="card-title">가치의 확장</h3>
-      <p class="card-body">1 + 1 = 2가 아닌, 1 × 1 = ∞
-        <p>두 도시의 상징이 하나의 굿즈 위에서 만날 때, 단순한 기념품을 넘어선 새로운 가치가 태어납니다.</p>
+      <p class="card-body">1 + 1 = 2가 아닌, 1 × 1 = ∞<br>두 도시의 상징이 하나의 굿즈 위에서 만날 때, 단순한 기념품을 넘어선 새로운 가치가 태어납니다.</p>
     </div>
     <div class="concept-card reveal reveal-delay2">
       <p class="card-number">03 Discovery</p>
@@ -1659,28 +1669,28 @@
       </div>
     </div>
 
-    <!-- 굿즈 카드 4: 포스터 & 엽서 -->
+    <!-- 굿즈 카드 4: 포스터 -->
     <div class="goods-card reveal reveal-delay2 is-mint">
       <div class="goods-slider-area" id="sliderArea-mint">
         <div class="goods-slider-track" id="sliderTrack-mint">
           <div class="goods-slide">
             <div class="goods-slide-placeholder">
               <div class="goods-slide-icon">🖼️</div>
-              <span class="goods-slide-label">Poster · A2</span>
+              <span class="goods-slide-label">Poster · Front</span>
             </div>
             <span class="goods-slide-num-badge">01 / 03</span>
           </div>
           <div class="goods-slide">
             <div class="goods-slide-placeholder">
               <div class="goods-slide-icon">🖼️</div>
-              <span class="goods-slide-label">Postcard · Set</span>
+              <span class="goods-slide-label">Poster · Wall</span>
             </div>
             <span class="goods-slide-num-badge">02 / 03</span>
           </div>
           <div class="goods-slide">
             <div class="goods-slide-placeholder">
               <div class="goods-slide-icon">🖼️</div>
-              <span class="goods-slide-label">Art · Detail</span>
+              <span class="goods-slide-label">Poster · Detail</span>
             </div>
             <span class="goods-slide-num-badge">03 / 03</span>
           </div>
@@ -1694,14 +1704,60 @@
         </div>
       </div>
       <div class="goods-info">
-        <span class="goods-tag">🖼️ Art Print</span>
-        <h3 class="goods-name">포스터 &amp; 엽서 세트</h3>
-        <p class="goods-desc">한 장에 담은 도시의 온도</p>
+        <span class="goods-tag">🖼️ Poster</span>
+        <h3 class="goods-name">X SEOUL 포스터</h3>
+        <p class="goods-desc">도시의 풍경을 공간 속에 머물게 하는 방법.</p>
         <div class="goods-coming">
           <div class="coming-dot"></div>
-          <span class="coming-text">₩ 5,000</span>
+          <span class="coming-text">₩ 3,000</span>
         </div>
         <button class="goods-detail-btn" onclick="openModal('mint')">상세보기 →</button>
+      </div>
+    </div>
+
+    <!-- 굿즈 카드 5: 엽서 -->
+    <div class="goods-card reveal reveal-delay2 is-white">
+      <div class="goods-slider-area" id="sliderArea-white">
+        <div class="goods-slider-track" id="sliderTrack-white">
+          <div class="goods-slide">
+            <div class="goods-slide-placeholder">
+              <div class="goods-slide-icon">✉️</div>
+              <span class="goods-slide-label">Postcard · Front</span>
+            </div>
+            <span class="goods-slide-num-badge">01 / 03</span>
+          </div>
+          <div class="goods-slide">
+            <div class="goods-slide-placeholder">
+              <div class="goods-slide-icon">✉️</div>
+              <span class="goods-slide-label">Postcard · Message</span>
+            </div>
+            <span class="goods-slide-num-badge">02 / 03</span>
+          </div>
+          <div class="goods-slide">
+            <div class="goods-slide-placeholder">
+              <div class="goods-slide-icon">✉️</div>
+              <span class="goods-slide-label">Postcard · Detail</span>
+            </div>
+            <span class="goods-slide-num-badge">03 / 03</span>
+          </div>
+        </div>
+        <button class="goods-slider-btn prev" onclick="goodsSlide('white',-1)" aria-label="이전">&#8592;</button>
+        <button class="goods-slider-btn next" onclick="goodsSlide('white',1)" aria-label="다음">&#8594;</button>
+        <div class="goods-slider-dots" id="sliderDots-white">
+          <div class="goods-slider-dot active" onclick="goodsGoTo('white',0)"></div>
+          <div class="goods-slider-dot" onclick="goodsGoTo('white',1)"></div>
+          <div class="goods-slider-dot" onclick="goodsGoTo('white',2)"></div>
+        </div>
+      </div>
+      <div class="goods-info">
+        <span class="goods-tag">✉️ Postcard</span>
+        <h3 class="goods-name">X SEOUL 엽서</h3>
+        <p class="goods-desc">마음속에 남은 풍경을 한 장에 담아 전하는 방법.</p>
+        <div class="goods-coming">
+          <div class="coming-dot"></div>
+          <span class="coming-text">₩ 2,000</span>
+        </div>
+        <button class="goods-detail-btn" onclick="openModal('white')">상세보기 →</button>
       </div>
     </div>
   </div>
@@ -1783,7 +1839,7 @@
 /* ── 굿즈 카드 이미지 슬라이더 ── */
 (function() {
   const sliders = {};
-  ['pink','yellow','blue','mint'].forEach(id => {
+  ['pink','yellow','blue','mint','white'].forEach(id => {
     sliders[id] = { current: 0, total: 3 };
   });
 
@@ -1801,7 +1857,7 @@
   };
 
   // 터치 스와이프 지원
-  ['pink','yellow','blue','mint'].forEach(id => {
+  ['pink','yellow','blue','mint','white'].forEach(id => {
     const area = document.getElementById('sliderArea-' + id);
     if (!area) return;
     let startX = 0;
@@ -1834,7 +1890,7 @@ const goodsData = {
     subtitle: '4개 도시 협업 · 아크릴 마그넷 4종',
     heroLabel: 'MAG',
     hue: '330deg',
-    desc: '일상 속 가장 가까운 곳에 도시의 풍경을 두는 마그넷입니다. 작지만 선명한 존재감으로 공간에 포인트를 더하고, 지나온 여행의 기억과 새로운 영감을 함께 담아냅니다.',
+    desc: '[마그넷] 일상 속 가장 가까운 곳에 도시의 풍경을 두는 방법. 냉장고, 캐비닛, 메모보드 등 다양한 공간에 가볍게 부착할 수 있으며, 작지만 선명한 존재감으로 공간에 특별한 포인트를 더합니다.',
     specs: [
       { label: '소재', value: '아크릴 + 자석' },
       { label: '사이즈', value: '규격 상이 (총 4종)' },
@@ -1849,13 +1905,12 @@ const goodsData = {
     subtitle: '4개 도시 협업 · PU 레더 슬림 여권 케이스 4종',
     heroLabel: 'PASS',
     hue: '45deg',
-    desc: '네 개 도시와 서울의 교차를 담은 슬림 여권 홀더입니다. 이동의 순간을 더욱 특별하게 만들고, 여행의 설렘과 앞으로 마주할 새로운 풍경에 대한 기대를 담아냅니다.',
+    desc: '[여권 케이스] 여행의 시작을 함께하는 여권 케이스입니다. 여권을 안전하게 보호하면서도 여행 필수품을 깔끔하게 정리할 수 있도록 제작되었으며, 출발의 순간부터 새로운 도시를 향한 설렘을 함께 담아냅니다.',
     specs: [
       { label: '소재', value: 'PU 레더 + 글로시 매트' },
       { label: '사이즈', value: '14.5 × 10.5 cm' },
       { label: '출시 예정', value: '2026.06' },
     ],
-    concept: '매 여행의 시작과 끝, 여권을 꺼낼 때마다 두 도시의 에너지를 함께 지니게 됩니다.',
   },
   blue: {
     color: '#6d9fff',
@@ -1865,30 +1920,42 @@ const goodsData = {
     subtitle: '4개 도시 협업 · 그래픽 HB 연필 6본 세트',
     heroLabel: 'PEN',
     hue: '210deg',
-    desc: '4개 도시 컬라보 에디션 그래픽 연필 4본 세트입니다. 각 연필 몸통에는 베네치아·파리·도쿄·뉴욕과 서울을 잇는 색감 그리고 X SEOUL 특유의 타이포그래픽 패턴이 새겨져 있습니다.',
+    desc: '[연필] 생각과 영감을 기록하는 가장 단순한 도구. 가벼운 메모부터 여행 중의 스케치까지, 손끝에서 시작된 한 줄의 기록이 도시의 기억과 새로운 아이디어로 이어집니다.',
     specs: [
-      { label: '구성', value: 'HB 연필 6본 + 전용 케이스' },
-      { label: '농도', value: '2B · HB · H (각 2본)' },
-      { label: '출시 예정', value: '2026 봄' },
+      { label: '소재', value: '흑연 + 목재 바디' },
+      { label: '사이즈', value: '17.5 cm' },
+      { label: '출시 예정', value: '2026.06' },
     ],
-    concept: '예술과 디자인의 도시, 그 창작의 순간을 연필 한 자루에 담습니다. 쓰고 그리는 행위 자체가 두 도시의 문화를 잇는 교차점이 됩니다.',
   },
   mint: {
     color: '#00BCA9',
     bgGradient: 'linear-gradient(135deg, #001a17 0%, #003830 100%)',
-    tag: '🖼️ Art Print',
-    name: 'X SEOUL 포스터 & 엽서 세트',
-    subtitle: '4개 도시 협업 · A2 포스터 2종 + 엽서 12종',
+    tag: '🖼️ Poster',
+    name: 'X SEOUL 포스터',
+    subtitle: '4개 도시 협업 · 그래픽 포스터',
     heroLabel: 'ART',
     hue: '170deg',
-    desc: '4개 도시와 서울이 교차하는 풍경을 담은 아트 포스터 4종 + 엽서 4종 세트입니다. 각 작품에는 베네치아·파리·도쿄·뉴욕과 서울의 지명이 교차하는 타이포그래피와 랜드마크 그래픽이 담깁니다.',
+    desc: '[포스터] 도시의 풍경을 공간 속에 머물게 하는 포스터입니다. 액자에 담거나 벽에 걸어 공간을 꾸밀 수 있으며, 한 장의 이미지가 일상에 새로운 분위기와 영감을 더합니다.',
     specs: [
-      { label: '구성', value: 'A2 포스터 2종 + 엽서 12종' },
-      { label: '용지', value: '포스터 200g · 엽서 300g 무광' },
-      { label: '사이즈', value: 'A2(420×594) · A6(148×100)' },
-      { label: '출시 예정', value: '2026 봄' },
+      { label: '소재', value: '무광 아트지' },
+      { label: '사이즈', value: 'A2 (420 × 594 mm)' },
+      { label: '출시 예정', value: '2026.06' },
     ],
-    concept: '두 도시의 랜드마크가 포스터와 엽서 한 장 한 장에 새겨집니다. 뒷면에는 랜드마크의 설명이 함께 인쇄됩니다.',
+  },
+  white: {
+    color: '#FFFFFF',
+    bgGradient: 'linear-gradient(135deg, #171717 0%, #3a3a3a 100%)',
+    tag: '✉️ Postcard',
+    name: 'X SEOUL 엽서',
+    subtitle: '4개 도시 협업 · 그래픽 엽서',
+    heroLabel: 'CARD',
+    hue: '0deg',
+    desc: '[엽서] 마음속에 남은 풍경을 한 장에 담아 전하는 방법. 소장용으로 간직하거나 메시지를 적어 전할 수 있으며, 여행의 순간과 도시의 감성을 오래도록 기억하게 해줍니다.',
+    specs: [
+      { label: '소재', value: '300g 무광 카드지' },
+      { label: '사이즈', value: 'A6 (105 × 148 mm)' },
+      { label: '출시 예정', value: '2026.06' },
+    ],
   },
 };
 
@@ -1913,7 +1980,6 @@ function openModal(type) {
   document.getElementById('modalName').textContent = d.name;
   document.getElementById('modalSubtitle').textContent = d.subtitle;
   document.getElementById('modalDesc').textContent = d.desc;
-  document.getElementById('modalConcept').textContent = d.concept;
 
   // 스펙
   const specsEl = document.getElementById('modalSpecs');
@@ -1926,7 +1992,7 @@ function openModal(type) {
   // CTA 버튼 색상
   const btn = document.getElementById('modalBtnPrimary');
   btn.style.background = d.color;
-  btn.style.color = type === 'yellow' ? '#000' : '#fff';
+  btn.style.color = (type === 'yellow' || type === 'white') ? '#000' : '#fff';
 
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
